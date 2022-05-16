@@ -7,7 +7,7 @@
                 <span>Dong</span>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn flat color="grey">
+            <v-btn flat class="grey--text">
                 <span>Sign Out</span>
                 <v-icon right>mdi-export</v-icon>
             </v-btn>
