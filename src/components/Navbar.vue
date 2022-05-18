@@ -13,6 +13,18 @@
             </v-btn>
         </v-toolbar>
         <v-navigation-drawer app v-model="drawer" class="success">
+            <v-container>
+                <v-row no-gutters class="mt-5">
+                    <v-col cols="12" align="center">
+                        <v-avatar size="100">
+                            <v-img src="/avatar-1.jpg"></v-img>
+                        </v-avatar>
+                    </v-col>
+                    <v-col cols="12" align="center">
+                        <p class="white--text subheading mt-1">The Net Ninja</p>
+                    </v-col>
+                </v-row>
+            </v-container>
             <v-list>
                 <v-list-item v-for="link in links" :key="link.text" :to="link.route">
                     <v-item-action>

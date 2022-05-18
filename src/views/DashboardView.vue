@@ -1,36 +1,60 @@
 <template>
   <div class="dashboard">
     <h1 class="subtitle-1 grey--text">Dashboard</h1>
-    <v-container class="my-5">
+      <v-container class="my-5">
       <v-row class="ma-1 mb-4">
-        <v-btn small text color="grey" @click="sortBy('title')">
-          <v-icon left small> mdi-folder </v-icon>
-          <span class="caption text-lowercase">By project name</span>
-        </v-btn>
-        <v-btn small text color="grey" @click="sortBy('person')">
-          <v-icon left small> mdi-account </v-icon>
-          <span class="caption text-lowercase">By person</span>
-        </v-btn>
-        <v-btn small text color="grey" @click="sortBy('status')">
-          <v-icon left small> mdi-check-all </v-icon>
-          <span class="caption text-lowercase">By status</span>
-        </v-btn>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn dark
+            v-bind="attrs"
+            v-on="on"
+            small text color="grey" @click="sortBy('title')">
+              <v-icon left small> mdi-folder </v-icon>
+              <span class="caption text-lowercase">By project name</span>
+            </v-btn>
+          </template>
+          <span>Sort projects by projects name</span>
+        </v-tooltip>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn dark
+            v-bind="attrs"
+            v-on="on"
+            small text color="grey" @click="sortBy('person')">
+              <v-icon left small> mdi-account </v-icon>
+              <span class="caption text-lowercase">By person</span>
+            </v-btn>
+          </template>
+          <span>Sort projects by person</span>
+        </v-tooltip>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn dark
+            v-bind="attrs"
+            v-on="on"
+            small text color="grey" @click="sortBy('status')">
+              <v-icon left small> mdi-check-all </v-icon>
+              <span class="caption text-lowercase">By status</span>
+            </v-btn>
+          </template>
+          <span>Sort projects by status</span>
+        </v-tooltip>
       </v-row >
       <v-card class="pa-4 ma-1" v-for="project in projects" :key="project.title">
         <v-row wrap :class="`pa-3 project ${project.status}`">
-          <v-col xs12 md6>
+          <v-col cols="12" md="6">
             <div class="caption grey--text">Project Title</div>
             <div>{{project.title}}</div>
           </v-col>
-          <v-col xs6 sm4 md2>
+          <v-col cols="6" sm="4" md="2">
             <div class="caption grey--text">Person</div>
             <div>{{project.person}}</div>
           </v-col>
-          <v-col xs6 sm4 md2>
+          <v-col cols="6" sm="4" md="2">
             <div class="caption grey--text">Due by</div>
             <div>{{project.due}}</div>
           </v-col>
-          <v-col xs2 sm4 md2>
+          <v-col cols="2" sm="4" md="2">
             <div class="text-right">
               <v-chip :class="`${project.status} white--text caption my-2`" small>{{project.status}}</v-chip>
             </div>
