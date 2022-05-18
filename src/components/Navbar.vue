@@ -7,6 +7,21 @@
                 <span>Dong</span>
             </v-toolbar-title>
             <v-spacer></v-spacer>
+            <!-- drop down menu -->
+            <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn flat text color="grey" v-bind="attrs" v-on="on">
+                        Menu
+                        <v-icon class="pl-1">mdi-chevron-down</v-icon>
+                    </v-btn>
+                </template>
+                <v-list>
+                    <v-list-item v-for="link in links" :key="link" :to="link.route">
+                    <v-list-item-title >{{ link.text }}</v-list-item-title>
+                    </v-list-item>
+                </v-list>
+            </v-menu>
+            <!-- /drop down menu -->
             <v-btn flat text color="grey">
                 <span>Sign Out</span>
                 <v-icon right>mdi-export</v-icon>
@@ -24,6 +39,11 @@
                         <p class="white--text subheading mt-1">The Net Ninja</p>
                     </v-col>
                 </v-row>
+                <v-row>
+                    <v-col cols="12" align="center">
+                        <Popup />
+                    </v-col>
+                </v-row>
             </v-container>
             <v-list>
                 <v-list-item v-for="link in links" :key="link.text" :to="link.route">
@@ -39,7 +59,10 @@
     </nav>
 </template>
 <script>
+import Popup from './Popup'
+
 export default {
+    components: { Popup },
     name: 'App',
     data(){
         return{
