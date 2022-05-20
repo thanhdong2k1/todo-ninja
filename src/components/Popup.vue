@@ -8,9 +8,9 @@
             Add a New Project
         </v-card-title>
         <v-card-text>
-          <v-form class="px-3">
-            <v-text-field label="Title" v-model="title" prepend-icon="mdi-folder"></v-text-field>
-            <v-textarea label="Information" v-model="content" prepend-icon="mdi-pen"></v-textarea>
+          <v-form class="px-3" ref="form">
+            <v-text-field label="Title" v-model="title" prepend-icon="mdi-folder" :rules="inputRules"></v-text-field>
+            <v-textarea label="Information" v-model="content" prepend-icon="mdi-pen" :rules="inputRules"></v-textarea>
             
             
             <v-menu max-width="290">
@@ -21,7 +21,7 @@
             </v-menu>
             
             <div class="text-center">
-              <v-btn flat color="success" class="mx-1" @click="submit()">Add project</v-btn>
+              <v-btn flat color="success" class="mx-1" @click="submit()" :loading="false">Add project</v-btn>
             </div>
           </v-form>
         </v-card-text>
@@ -31,6 +31,8 @@
 
 <script>
 import format from 'date-fns/format'
+import parseISO from 'date-fns/parseISO'
+// import db from '@/fb'
 
 export default {
     name: 'App',
@@ -39,17 +41,42 @@ export default {
             title:'',
             content: '',
             due: null,
+            inputRules:[
+              v =>  v && v.length >= 3 || 'Minimum length is 3 characters'
+            ],
+            loading: false,
+            dialog: false,
         }
     },
     methods:{
       submit(){
-        return console.log(this.title, this.content)
+        // if(this.$refs.form.validate()){
+        //   this.loading= true
+
+        //   const project={
+        //     title: this.title,
+        //     content: this.content,
+        //     due: format(parseISO(this.due), 'do MMM yyyy'),
+        //     person: 'The Net Ninja',
+        //     status: this.status,
+        //   }
+        //   db.collection('projects').add(project).then(() => {
+        //     this.loading= false
+
+        //   })
+        // }
+        this.loading= true
+        this.dialog= true
+        console.log(this.loading)
+        this.loading= false
+        this.dialog= false
+        this.$emit('projectAdded')
       },
     },
     computed: {
-    formattedDate() {
-      return this.due ? format(this.due,"Do MMMM YYYY") : ''
-    }
+      formattedDate(){
+      return this.due ? format(parseISO(this.due), 'do MMM yyyy') : ''
+    },
   }
 }
 </script>

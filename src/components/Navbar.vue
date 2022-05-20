@@ -1,5 +1,9 @@
 <template>
     <nav>
+        <v-snackbar v-model="snackbar" :timeout="3000" bottom color="success">
+            <span>Awesome! You click</span>
+            <v-btn flat text color="white" @click="snackbar = false">close</v-btn>
+        </v-snackbar>
         <v-toolbar flat app>
             <v-app-bar-nav-icon app class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title class="text-uppercase grey--text">
@@ -41,7 +45,7 @@
                 </v-row>
                 <v-row>
                     <v-col cols="12" align="center">
-                        <Popup />
+                        <Popup @projectAdded="snackbar= true"/>
                     </v-col>
                 </v-row>
             </v-container>
@@ -72,6 +76,7 @@ export default {
                 { icon: 'mdi-folder', text: 'My Projects', route: '/projects' },
                 { icon: 'mdi-account', text: 'Team', route: '/team' },
             ],
+            snackbar: false
         }
     }
 }
